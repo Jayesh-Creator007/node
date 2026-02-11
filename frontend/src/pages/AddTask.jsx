@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import API from '../api/axios';
 import Navbar from '../components/Navbar';
 
-export default function AddProduct() {
+export default function AddTask() {
   const [name, setName] = useState('');
   const [categoryId, setCategoryId] = useState('');
   const [status, setStatus] = useState(true);
@@ -40,12 +40,12 @@ export default function AddProduct() {
       });
 
       if (response.data.status) {
-        toast.success('Product added successfully!');
-        navigate('/products');
+        toast.success('Task added successfully!');
+        navigate('/tasks');
       }
     } catch (error) {
       console.log(error);
-      toast.error('Failed to add product');
+      toast.error('Failed to add task');
     } finally {
       setLoading(false);
     }
@@ -57,15 +57,15 @@ export default function AddProduct() {
       <div className="container mt-4">
       <div className="row justify-content-center">
         <div className="col-md-6">
-          <h2 className="fw-semibold mb-4">Add Product</h2>
+          <h2 className="fw-semibold mb-4">Add Task</h2>
 
           <form onSubmit={handleSubmit}>
             <div className="mb-3">
-              <label className="form-label">Product Name</label>
+              <label className="form-label">Task Name</label>
               <input
                 type="text"
                 className="form-control"
-                placeholder="Enter product name"
+                placeholder="Enter task name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 disabled={loading}
@@ -111,12 +111,12 @@ export default function AddProduct() {
                 className="btn btn-primary"
                 disabled={loading}
               >
-                {loading ? 'Adding...' : 'Add Product'}
+                {loading ? 'Adding...' : 'Add Task'}
               </button>
               <button
                 type="button"
                 className="btn btn-secondary"
-                onClick={() => navigate('/products')}
+                onClick={() => navigate('/tasks')}
                 disabled={loading}
               >
                 Cancel

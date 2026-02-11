@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import API from '../api/axios';
+import Navbar from '../components/Navbar';
 
 
 export default function AddCategory() {
@@ -17,16 +19,22 @@ export default function AddCategory() {
 
         try {
             const response = await API.post('/category', { name, status });
-
-
+            if (response.data.status) {
+                toast.success('Category added successfully!');
+                navigate('/categories');
+            }
         } catch (error) {
             console.log(error);
-
+            toast.error('Failed to add category');
+        } finally {
+            setLoading(false);
         }
     };
 
     return (
-        <div className="container mt-4">
+        <>
+            <Navbar />
+            <div className="container mt-4">
             <h2 className="fw-semibold mb-3">Add Category</h2>
 
             <form onSubmit={handleSubmit}>
@@ -57,9 +65,11 @@ export default function AddCategory() {
                     </label>
                 </div>
 
-                <button type="submit" className="btn btn-primary" disabled={loading}>Add Category</button>
+                <button type="submit" className="btn btn-primary" disabled={loading}>{loading ? 'Adding...' : 'Add Category'}</button>
+                <button type="button" className="btn btn-secondary ms-2" onClick={() => navigate('/categories')} disabled={loading}>Cancel</button>
 
             </form>
-        </div>
+            </div>
+        </>
     );
 }

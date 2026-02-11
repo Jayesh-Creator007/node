@@ -3,27 +3,27 @@ const { Schema, model } = require("mongoose");
 const user = new Schema({
     name:{
         type:String,
-        require:true,
+        required:true,
         unique:true
     },
     email: {
         type: String,
-        require: true,
+        required: true,
         unique: true
     },
     password: {
         type: String,
-        require: true,
+        required: true,
         unique: true
     },
     status:{
         type:Boolean,
-        require:true,
+        required:true,
         default:true
     },
     role_id:{
         type:String,
-        require:true,
+        required:true,
         default:"user",
         enum:["admin","user"]
     }

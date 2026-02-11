@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import API from '../api/axios';
 import Swal from 'sweetalert2';
 import { toast } from 'react-toastify';
+import Navbar from '../components/Navbar';
 
 export default function ViewCategory() {
     const [categories, setCategories] = useState([]);
@@ -19,7 +20,7 @@ export default function ViewCategory() {
     const fetchCategories = async () => {
         try {
             const response = await API.get('/category');
-            if (response.data.success) {
+            if (response.data.status) {
                 setCategories(response.data.records || []);
             }
         } catch (error) {
@@ -44,7 +45,7 @@ export default function ViewCategory() {
 
         try {
             const response = await API.delete(`/category/${id}`);
-            if (response.data.success) {
+            if (response.data.status) {
                 toast.success("Category deleted");
                 fetchCategories();
             } else {
@@ -67,7 +68,7 @@ export default function ViewCategory() {
         try {
             const response = await API.put(`/category/${id}`, { name: editName, status: editStatus });
 
-            if (response.data.success) {
+            if (response.data.status) {
                 toast.success("Category updated");
                 setEditingId(null);
                 fetchCategories();
@@ -85,7 +86,9 @@ export default function ViewCategory() {
     }
 
     return (
-        <div className="category-page">
+        <>
+            <Navbar />
+            <div className="category-page">
 
             <div className="page-header">
                 <h2 className="page-title">View Categories</h2>
@@ -211,6 +214,7 @@ export default function ViewCategory() {
         border: 1px solid rgba(0,0,0,0.05);
       }
     `}</style>
-        </div>
+            </div>
+        </>
     );
 }

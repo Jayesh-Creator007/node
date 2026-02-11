@@ -1,4 +1,4 @@
-const {  mongoose } = require("mongoose")
+const mongoose = require("mongoose")
 
 exports.Configdb = () => {
     mongoose.connect(process.env.URL)

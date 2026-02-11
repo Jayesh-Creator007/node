@@ -10,7 +10,7 @@ exports.store = async (req, res) => {
             message: "Category added"
         })
     } catch (error) {
-        console.log(err);
+        console.log(error);
     }
 }
 
@@ -23,7 +23,7 @@ exports.index = async (req, res) => {
             records
         })
     } catch (error) {
-        console.log(err);
+        console.log(error);
     }
 }
 
@@ -41,7 +41,7 @@ exports.update = async (req, res) => {
             message: "Category Updated"
         })
     } catch (error) {
-        console.log(err);
+        console.log(error);
     }
 }
 
@@ -54,6 +54,6 @@ exports.trash = async (req, res) => {
             message: "Category deleted"
         })
     } catch (error) {
-        console.log(err);
+        console.log(error);
     }
 }
